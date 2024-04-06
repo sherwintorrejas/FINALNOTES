@@ -1,0 +1,131 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    position: relative;
+    text-align: center; 
+    background-image: radial-gradient(circle, #1a7d9f, #006574, #004c4c, #023329, #021c0c);
+    
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    height: 100vh;
+    background-image: radial-gradient(circle, #1a7d9f, #006574, #004c4c, #023329, #021c0c);
+    
+}
+
+/* Integrated CSS for the login form */
+.login-form {
+    max-width: 400px;
+    /* margin-top: 50px; */
+    padding: 20px;
+    border-radius: 13px;
+    background: transparent;
+    box-shadow:  5px 5px 10px white,
+                -5px -5px 10px #ffff;
+    max-height: 290px;
+}
+
+.login-form h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+.login-form .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    padding: 6px 10px;
+}
+
+.login-form input:invalid + .error-message {
+    display: block;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.login-form input,
+.login-form select {
+            width: 95%;
+            padding: 8px;
+            border: none;
+            outline: none;
+            border-radius: 15px;
+            background-color: white;
+            box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.3);
+
+}
+
+.login-form input:focus,
+.login-form select:focus {
+            background-color: white;
+            box-shadow: 13px 13px 100px white, -13px -13px 100px;
+}
+
+.btn {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    transition: .4s;
+    background-color: #00BFA6;
+}
+
+.btn span:last-child {
+    display: none;
+}
+
+.btn:hover {
+    transition: .4s;
+  
+    background-color: #fff;
+    color: #00BFA6;
+}
+
+.btn:active {
+    background-color: #87dbd0;
+}
+
+/* Registration link */
+.registration-link {
+    text-align: center;
+    margin-top: 15px;
+}
+.title {
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh; /* Adjust as needed */
+}
+
+.title h1 {
+font-size: 10rem; /* Adjust as needed */
+text-align: center;
+
+}
+
+.pl{
+    font-size: small;
+    opacity: 0.7;
+}
