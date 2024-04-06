@@ -1,4 +1,9 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
     <style>
         .sidenav {
             height: 100%;
@@ -12,7 +17,7 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: flex-start;
-            background-image: linear-gradient(to top, #005bea 0%, #005bea 100%);
+            background-color: #58A399;
         }
 
         .profile {
@@ -25,19 +30,21 @@
             justify-content: center;
             margin: 20px auto;
         }
-    
+
         .profile img {
             width: 100px;
             height: 100px;
             border-radius: 50%;
             margin-bottom: 10px;
         }
+
         .profile a {
             text-decoration: none;
-            color: white;
+            color: black;
         }
+
         .profile h2 {
-            color: white;
+            color: black;
             margin: 5px;
             text-decoration: none;
         }
@@ -48,7 +55,7 @@
         }
 
         .nav-link {
-            color: white;
+            color: black;
             text-decoration: none;
             display: block;
             text-align: left;
@@ -56,6 +63,7 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
+            padding: 10px 20px;
         }
 
         .nav-link img {
@@ -72,7 +80,7 @@
         }
 
         .nav-logout {
-            color: white;
+            color: black;
             text-decoration: none;
             display: block;
             text-align: left;
@@ -80,6 +88,7 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
+            padding: 10px 20px;
         }
 
         .nav-logout img {
@@ -94,77 +103,69 @@
             margin-left: 4px;
             margin-right: 98px;
         }
-
-        .nav-link:hover {
-            background-position: right center;
-            background-size: 200% auto;
-            -webkit-animation: pulse 2s infinite;
-            animation: pulse512 1.5s infinite;
-        }
-
         .nav-logout:hover {
-            background-position: right center;
-            background-size: 200% auto;
-            -webkit-animation: pulse 2s infinite;
-            animation: pulse512 1.5s infinite;
+             background-color: #A8CD9F; /* Change background color on hover */
+         }
+        /* Hover effect for nav links */
+        .nav-link:hover{
+            background-color: #A8CD9F; /* Change background color on hover */
         }
 
-        @keyframes pulse512 {
-            0% {
-                box-shadow: 0 0 0 0 black;
-            }
-
-            70% {
-                box-shadow: 0 0 0 10px rgb(218 103 68 / 0%);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
-            }
+        /* Active link styling */
+        .active-link {
+            color: black; /* Change active link color */
+            background-color:  #A8CD9F; /* Change active link background color */
         }
     </style>
 </head>
 <body>
 <?php
+    // Check if user is logged in
+    if (isset($_SESSION['user_id'])) {
+        // Get user ID from session
+        $user_id = $_SESSION['user_id'];
 
+        // Fetch user details from database
+        $sql = "SELECT first_name, last_name, profile_image FROM users WHERE user_id = $user_id";
+        $result = mysqli_query($link, $sql);
 
-// Check if user is logged in
-if (isset($_SESSION['user_id'])) {
-    // Get user ID from session
-    $user_id = $_SESSION['user_id'];
+        if ($result && mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $full_name = $row["first_name"] . ' ' . $row["last_name"];
+            $profile_image_filename = $row["profile_image"];
 
-    // Fetch user details from database
-    $sql = "SELECT first_name, last_name, profile_image FROM users WHERE user_id = $user_id";
-    $result = mysqli_query($link, $sql);
+            // Construct full file path for profile image
+            $profile_image_path = $profile_image_filename;
 
-    if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $full_name = $row["first_name"] . ' ' . $row["last_name"];
-        $profile_image_filename = $row["profile_image"];
-
-        // Construct full file path for profile image
-        $profile_image_path = $profile_image_filename;
-
-        // Check if file exists
-        if (file_exists($profile_image_path)) {
-            // Display profile image and name
-            echo '<div class="sidenav">';
-            echo '<div class="profile">';
-            echo '<a href="profile.php">';
-            echo '<img src="' . $profile_image_path . '" alt="Profile Picture">';
-            echo '<h2>' . $full_name . '</h2>';
-            echo '</div>';
+            // Check if file exists
+            if (file_exists($profile_image_path)) {
+                // Display profile image and name
+                echo '<div class="sidenav">';
+                echo '<div class="profile">';
+                echo '<a href="profile.php">';
+                echo '<img src="' . $profile_image_path . '" alt="Profile Picture">';
+                echo '<h2>' . $full_name . '</h2>';
+                echo '</div>';
+            } else {
+                // Profile image not found, display default profile image
+                echo '<div class="sidenav">';
+                echo '<div class="profile">';
+                echo '<a href="profile.php">';
+                echo '<img src="profile/defaultprofile.png" alt="Default Profile Picture">';
+                echo '<h2>' . $full_name . '</h2>';
+                echo '</div>';
+            }
         } else {
-            // Profile image not found, display default profile image
+            // No user found with the given ID or query failed
             echo '<div class="sidenav">';
             echo '<div class="profile">';
             echo '<a href="profile.php">';
             echo '<img src="profile/defaultprofile.png" alt="Default Profile Picture">';
-            echo '<h2>' . $full_name . '</h2>';
+            echo '<h2>Welcome</h2>';
             echo '</div>';
         }
     } else {
-        // No user found with the given ID or query failed
+        // No user logged in, display default profile and "Welcome"
         echo '<div class="sidenav">';
         echo '<div class="profile">';
         echo '<a href="profile.php">';
@@ -172,34 +173,41 @@ if (isset($_SESSION['user_id'])) {
         echo '<h2>Welcome</h2>';
         echo '</div>';
     }
-} else {
-    // No user logged in, display default profile and "Welcome"
-    echo '<div class="sidenav">';
-    echo '<div class="profile">';
-    echo '<a href="profile.php">';
-    echo '<img src="profile/defaultprofile.png" alt="Default Profile Picture">';
-    echo '<h2>Welcome</h2>';
-    echo '</div>';
-}
+
+    // Get current page filename
+    $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 
-
 <!-- Add Home, and Archive links with icons -->
-<a href="home.php" class="nav-link">
+<a href="home.php" class="nav-link <?php if($currentPage == 'home.php') echo 'active-link'; ?>">
     <img src="icons/home.png" alt="Home Icon">
     <span>Home</span>
 </a>
-<a href="archive.php" class="nav-link">
+<a href="archive.php" class="nav-link <?php if($currentPage == 'archive.php') echo 'active-link'; ?>">
     <img src="icons/archive.png" alt="Archive Icon">
     <span>Archive</span>
 </a>
-<a href="trashdash.php" class="nav-link">
+<a href="trashdash.php" class="nav-link <?php if($currentPage == 'trashdash.php') echo 'active-link'; ?>">
     <img src="icons/trash.png" alt="Trash Icon">
     <span>Trash</span>
 </a>
 <!-- Logout link -->
-<a href="login.php" class="nav-logout">
+<a href="#" class="nav-logout" onclick="return confirmLogout();">
     <img src="icons/logout.png" alt="Logout Icon">
     <span>Logout</span>
 </a>
+
+<script>
+    // JavaScript function to show logout confirmation dialog
+    function confirmLogout() {
+        if (confirm("Are you sure you want to logout?")) {
+            window.location.href = "logout.php"; // Redirect to logout.php if user confirms
+            return true;
+        } else {
+            return false; // Do nothing if user cancels
+        }
+    }
+</script>
 </div>
+</body>
+</html>

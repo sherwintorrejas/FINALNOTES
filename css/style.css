@@ -3,7 +3,7 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
     position: relative; /* Set position relative for absolute positioning */
-    background-image: radial-gradient(circle, #1a7d9f, #006574, #004c4c, #023329, #021c0c);
+    background-color: #A8CD9F;  
 }
 
 .content {
@@ -137,23 +137,23 @@ body {
 }
 
 .row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust minmax values and other properties as needed */
+    grid-gap: 20px; /* Adjust the gap between grid items */
+    padding-left: 20px;
 }
+
 
 .card {
     width: 200px; /* Adjust width as needed */
     height: 180px; /* Adjust height as needed */
     margin-bottom: 20px; /* Add margin below each row */
-    background-color: #4ea8de;
     padding: 10px;
     border-radius: 10%;
     overflow: hidden; /* Hide overflow */
     position: relative; /* Add relative positioning */
     transition: box-shadow 0.3s ease; /* Add transition for smooth hover effect */
-    background-image: linear-gradient(to top,  #005bea 0%, #00c6fb 100%);
+    background-color: #58A399;
 }
 
 .card:hover {
@@ -186,7 +186,6 @@ body {
     top: 10px; /* Adjust as needed */
     right: 10px; /* Adjust as needed */
     cursor: pointer;
-    z-index: 1; /* Add z-index to ensure it appears above other elements */
 }
 
 .dropdown-toggle img {
@@ -223,8 +222,7 @@ body {
 }
 
 .btn:hover {
-    transition: .4s;
-    border: 2px dashed #00BFA6;
+    transition: .3s;
     background-color: #fff;
     color: #00BFA6;
 }
@@ -232,3 +230,95 @@ body {
 .btn:active {
     background-color: #87dbd0;
 }
+  
+
+
+.profile-content {
+    max-width: 800px;
+    height: 350px;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow:  5px 5px 10px ,
+        -5px -5px 10px;
+}
+
+.profile-container {
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 40px;
+}
+
+.profile-img {
+    width: 250px;
+    height: 250px;
+    float: left;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer; /* Add cursor pointer to indicate clickable */
+}
+
+.profile-details p {
+    margin: 10px 0;
+    text-align: justify;
+    font-weight: bold;
+    color: #333;
+    font-size: 18px;
+} 
+
+.edit-profile-form {
+    margin-top: 20px;
+}
+
+.edit-profile-form input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+
+.modal {
+    display: none; 
+    position: fixed; 
+    align-items: center;
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    border-radius: 5px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+

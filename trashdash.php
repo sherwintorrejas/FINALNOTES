@@ -17,7 +17,38 @@ $user_id = $_SESSION['user_id'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <link rel="stylesheet" href="css/stle.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+
+.tooltip-container {
+    position: absolute;
+    bottom: 10px; /* Adjust as needed */
+    right: 10px;
+}
+
+.tooltip-icon {
+    width: 24px; /* Adjust width as needed */
+    height: 24px; /* Adjust height as needed */
+    cursor: pointer;
+}
+.tooltip {
+    position: absolute;
+    bottom: 100%; /* Position above the icon */
+    left: -60%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    visibility: hidden;
+    z-index: 9; 
+}
+
+.tooltip-container:hover .tooltip {
+    visibility: visible;
+}
+
+    </style>
 </head>
 <body>
 <?php include 'bars/sidebar.php'; ?>
@@ -25,7 +56,7 @@ $user_id = $_SESSION['user_id'];
 <div class="content">
     <?php include 'bars/search.php'?>
 
-    <h1  style="color: #ffff">TRASH</h1>
+    <h1>TRASH</h1>
     <?php
     $sql = "SELECT dn.deleted_note_id, dn.note_id, dn.deleted_at, dn.scheduled_permanent_deletion,
                 n.title, n.text, n.created_at, n.updated_at
@@ -52,19 +83,24 @@ $user_id = $_SESSION['user_id'];
             }
 
             echo "<div class='card' id='note_" . $row['note_id'] . "'>";
-            echo "<h2>" . $row['title'] . "</h2>";
-            echo "<div class='card-content'>" . (strlen($row['text']) > 60 ? substr($row['text'], 0, 60) . "..." : $row['text']) . "</div>";
-            echo "<p class='update-time'>" . $difference . " days until permanent deletion</p>";
-            echo "<div class='dropdown'>";
-            echo "<div class='dropdown-toggle' onclick='toggleDropdown(this)'><img src='icons/down.png' alt='Dropdown'></div>";
-            echo "<div class='dropdown-menu'>";
-            echo "<div class='dropdown-menu-item' onclick='confirmDelete(" . $row['note_id'] . ")'>Delete</div>";
-            echo "<div class='dropdown-menu-item' onclick='restoreNote(". $row['note_id'] . ")'>Restore</div>";
-            echo "<div class='dropdown-menu-item' onclick='viewNote(" . $row['note_id'] . ")'>View</div>";
+echo "<h2>" . $row['title'] . "</h2>";
+echo "<div class='card-content'>" . (strlen($row['text']) > 60 ? substr($row['text'], 0, 60) . "..." : $row['text']) . "</div>";
+echo "<div class='card-actions'>";
+echo "<div class='tooltip-container'>";
+echo "<img src='icons/mark.png' alt='Tooltip' class='tooltip-icon'>";
+echo "<span class='tooltip'>" . $difference . " days until permanent deletion</span>";
+echo "</div>";
+echo "<div class='dropdown'>";
+echo "<div class='dropdown-toggle' onclick='toggleDropdown(this)'><img src='icons/down.png' alt='Dropdown'></div>";
+echo "<div class='dropdown-menu'>";
+echo "<div class='dropdown-menu-item' onclick='confirmDelete(" . $row['note_id'] . ")'>Delete</div>";
+echo "<div class='dropdown-menu-item' onclick='restoreNote(". $row['note_id'] . ")'>Restore</div>";
+echo "<div class='dropdown-menu-item' onclick='viewNote(" . $row['note_id'] . ")'>View</div>";
+echo "</div>";
+echo "</div>";
+echo "</div>";
+echo "</div>";
 
-            echo "</div>";
-            echo "</div>";
-            echo "</div>";
 
             $i++;
         }

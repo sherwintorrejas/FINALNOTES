@@ -49,169 +49,14 @@ if ($result && $result->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Preserve the existing CSS styles */
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding-top: 75px;
-            padding-left: 130px;
-            justify-content: center;
-            align-items: center;
-            /* min-height: 100vh; */
-            position: relative; /* Set position relative for absolute positioning */
-            background-image: radial-gradient(circle, #1a7d9f, #006574, #004c4c, #023329, #021c0c);
-        }
-
-        .content {
-            max-width: 800px;
-            height: 380px;
-            background-color: #fff;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow:  5px 5px 10px #bebebe,
-                -5px -5px 10px #bebebe;
-        }
-
-        .profile-container {
-            text-align: center;
-            padding: 20px;
-            display: flex;
-            justify-content: space-evenly;
-        }
-
-        .profile-img {
-            width: 250px;
-            height: 250px;
-            float: left;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-            transition: box-shadow 0.3s ease;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            cursor: pointer; /* Add cursor pointer to indicate clickable */
-        }
-        
-        .profile-details p {
-            margin: 10px 0;
-            text-align: justify;
-            font-weight: bold;
-            color: #333;
-            font-size: 18px;
-        } 
-
-        .edit-profile-form {
-            margin-top: 20px;
-        }
-
-        .edit-profile-form input {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-       
-
-        .modal {
-            display: none; 
-            position: fixed; 
-            align-items: center;
-            z-index: 1; 
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto; 
-            background-color: rgba(0,0,0,0.4); 
-            padding-top: 60px;
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            border-radius: 5px;
-        }
-        
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-        }
-        
-        .btn {
-            width: 100%;
-            padding: 14px 40px;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            border-radius: 10px;
-            border: 2px dashed #00BFA6;
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-            transition: .4s;
-            background-color: #00BFA6;
-        }
-        .btn span:last-child {
-            display: none;
-        }
-
-        .btn:hover {
-            transition: .4s;
-            border: 2px dashed #00BFA6;
-            background-color: #fff;
-            color: #00BFA6;
-        }
-
-        .btn:active {
-            background-color: #87dbd0;
-        }
-        .btn-up{
-            width: 10%;
-            padding: 14px 10px;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            border-radius: 10px;
-            border: 2px dashed #00BFA6;
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-            transition: .4s;
-            background-color: #00BFA6;
-        }
-
-        .btn-up span:last-child {
-            display: none;
-        }
-
-        .btn-up:hover {
-            transition: .4s;
-            border: 2px dashed #00BFA6;
-            background-color: #fff;
-            color: #00BFA6;
-        }
-
-        .btn-up:active {
-            background-color: #87dbd0;
-        }
-    </style>
+    <link rel="stylesheet" href="css/profile.css">
+    >
 </head>
 <body>
     <?php include 'bars/sidebar.php'?>
+    <h1>PROFILE</h1>
     <div class="content">
-    <h1>Profile</h1>
+
     <div class="profile-container">
         <!-- Display profile image -->
         <img class="profile-img" src="<?php echo $profile_image_path; ?>" alt="Profile Picture" onclick="openImageUploadModal()">
@@ -231,7 +76,7 @@ if ($result && $result->num_rows > 0) {
 <div id="editProfileModal" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-content">
+  <div class="modal-infocontent">
     <span class="close" onclick="closeEditProfileModal()">&times;</span>
     <form class="edit-profile-form" method="POST" action="update_profile.php">
         <label for="name">Fullname:</label>
@@ -249,18 +94,23 @@ if ($result && $result->num_rows > 0) {
   </div>
 </div>
 
-<!-- The Image Upload Modal -->
 <div id="imageUploadModal" class="modal">
-
   <!-- Modal content -->
-  <div class="modal-content">
+  <div class="modal-imgecontent">
     <span class="close" onclick="closeImageUploadModal()">&times;</span>
     <form class="edit-profile-form" method="POST" action="upload_profile_image.php" enctype="multipart/form-data">
-        <input type="file" name="profile_image" accept="image/*"><br>
+        <label for="profile_image" class="custom-file-upload">
+            <img src="icons/upload.png" alt="Upload icon" class="upload-icon">
+            <span id="file-name" class="file-name">No file chosen</span>
+            <input id="profile_image" type="file" name="profile_image" accept="image/*" onchange="displayFileName(this)" style="display: none;">
+        </label>
+        <br><br>
         <button class="btn-up" type="submit">Upload</button>
     </form>
   </div>
 </div>
+
+
 
 <script>
     function openEditProfileModal() {
@@ -281,7 +131,18 @@ if ($result && $result->num_rows > 0) {
     function closeImageUploadModal() {
         var modal = document.getElementById("imageUploadModal");
         modal.style.display = "none";
+
     }
+
+    function displayFileName(input) {
+        const fileNameSpan = document.getElementById('file-name');
+        if (input.files && input.files.length > 0) {
+            fileNameSpan.textContent = input.files[0].name;
+        } else {
+            fileNameSpan.textContent = '';
+        }
+    }
+
 </script>
 
 </body>

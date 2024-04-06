@@ -17,14 +17,14 @@
         border: 2px solid transparent;
         border-radius: 8px;
         outline: none;
-        background-color: #D9E8D8;
+        background-color: transparent;
         color: #0d0c22;
-        box-shadow: 0 0 5px #C1D9BF, 0 0 0 10px #f5f5f5eb;
+        box-shadow: 0 0 3px, 0 0 0 2px #555;
         transition: .3s ease;
     }
 
     .input::placeholder {
-        color: #777;
+        color: black;
     }
 
     .icon {

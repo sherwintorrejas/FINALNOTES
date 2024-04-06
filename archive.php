@@ -17,7 +17,7 @@ $user_id = $_SESSION['user_id'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archive</title>
-    <link rel="stylesheet" href="css/stle.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <?php include 'bars/sidebar.php'; ?>
@@ -25,7 +25,7 @@ $user_id = $_SESSION['user_id'];
 <div class="content">
     <?php include 'bars/search.php'?>
 
-    <h1  style="color: #ffff">Archive</h1>
+    <h1>ARCHIVE</h1>
     <?php
     // Modified SQL query to fetch archived notes of the logged-in user
     $sql = "SELECT archive.archive_id, archive.note_id, notes.user_id, notes.title, notes.text, notes.updated_at 

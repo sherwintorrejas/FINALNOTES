@@ -1,5 +1,5 @@
-<?php 
-    /// Function to format the updated time
+<?php
+/// Function to format the updated time
 function formatUpdateTime($updated_at) {
     // Convert the updated time to a Unix timestamp
     $updated_time = strtotime($updated_at);
@@ -24,23 +24,18 @@ function formatUpdateTime($updated_at) {
     if ($hours_difference < 5 && !$is_new_day) {
         // Less than 5 hours and not a new day: Display only the time
         return date("h:i A", $updated_time);
-    } elseif ($is_new_day) {
-        // New day: Display "Yesterday" and the time
-        return "Yesterday " . date("h:i A", $updated_time);
     } elseif ($days_difference == 0) {
         // Today: Display "Today" and the time
         return "Today " . date("h:i A", $updated_time);
-    } elseif ($days_difference >= 2 && $days_difference < 7) {
+    } elseif ($days_difference == 1 && $is_new_day) {
+        // Yesterday: Display "Yesterday" and the time
+        return "Yesterday " . date("h:i A", $updated_time);
+    } elseif ($weeks_difference < 1) {
         // Within the past week: Display the day of the week and the time
         return date("l h:i A", $updated_time);
-    } elseif ($weeks_difference < 1) {
-        // More than a week ago but within the same week: Display the month and the date
-        return date("F j, Y", $updated_time);
     } else {
         // More than a week ago: Display the month and the date
         return date("F j, Y", $updated_time);
     }
 }
-
-
 ?>
