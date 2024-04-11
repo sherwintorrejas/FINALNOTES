@@ -17,7 +17,7 @@
             padding: 20px;
             border-radius: 10px;
             background: transparent;
-            box-shadow:  5px 5px 10px #bebebe,
+            box-shadow:  5px 5px 10px,
                 -5px -5px 10px #ffff;
         }
 
@@ -130,17 +130,17 @@
         /* Integrated CSS for the login form */
         .login-form {
             max-width: 400px;
-            /* margin-top: 50px; */
             padding: 20px;
             border-radius: 13px;
             background: transparent;
-            box-shadow:  5px 5px 10px white,
+            box-shadow:  5px 5px 10px,
                         -5px -5px 10px #ffff;
             max-height: 340px;
         }
         
         .login-form h1 {
             text-align: center;
+            color: white;
             margin-bottom: 20px;
         }
         
@@ -213,7 +213,8 @@
         }
         
         .pl{
-            font-size: small;
+            font-size: 15px;
+            color: white;
         }
         .error_message{
             color: red;
