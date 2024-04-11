@@ -1,0 +1,108 @@
+// <!-- <script>
+//         function toggleDropdown(element) {
+//             var dropdownMenu = element.nextElementSibling;
+//             dropdownMenu.classList.toggle('active');
+//         }
+
+//         // Close dropdowns when clicking outside
+//         window.onclick = function(event) {
+//             if (!event.target.matches('.dropdown-toggle img')) {
+//                 var dropdowns = document.getElementsByClassName("dropdown-menu");
+//                 for (var i = 0; i < dropdowns.length; i++) {
+//                     var openDropdown = dropdowns[i];
+//                     if (openDropdown.classList.contains('active')) {
+//                         openDropdown.classList.remove('active');
+//                     }
+//                 }
+//             }
+//         }
+
+//         function unarchiveNote(noteId) {
+//             // AJAX request to unarchive note
+//             var xhr = new XMLHttpRequest();
+//             xhr.open("POST", "unarchive_note.php", true);
+//             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//             xhr.onreadystatechange = function() {
+//                 if (xhr.readyState == 4 && xhr.status == 200) {
+//                     // Reload page after unarchiving note
+//                     window.location.reload();
+//                 }
+//             };
+//             xhr.send("note_id=" + noteId);
+//         }
+
+//         function viewNote(noteId) {
+//             var xhr = new XMLHttpRequest();
+//             xhr.onreadystatechange = function() {
+//                 if (xhr.readyState == 4 && xhr.status == 200) {
+//                     var data = JSON.parse(xhr.responseText);
+//                     showViewPopup(data.title, data.text);
+//                 }
+//             };
+//             xhr.open("POST", "view_note.php", true);
+//             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+//             xhr.send("note_id=" + noteId);
+//         }
+
+//         function showViewPopup(title, text) {
+//             document.getElementById("view-popup-title").textContent = title;
+//             document.getElementById("view-popup-text").textContent = text;
+//             document.getElementById("view-popup").style.display = "block";
+//         }
+
+//         function closeViewPopup() {
+//             document.getElementById("view-popup").style.display = "none";
+//         }
+
+//         function showPopup(id, title, text) {
+//             // Fetch the data from the server using AJAX
+//             var xhr = new XMLHttpRequest();
+//             xhr.onreadystatechange = function() {
+//                 if (xhr.readyState == 4 && xhr.status == 200) {
+//                     var data = JSON.parse(xhr.responseText);
+//                     // Populate the popup fields with fetched data
+//                     document.getElementById("popup-title").textContent = "Edit Note";
+//                     document.getElementById("popup-title-input").value = data.title !== undefined ? data.title : '';
+//                     document.getElementById("popup-text").value = data.text !== undefined ? data.text : '';
+//                     document.getElementById("popup-text").setAttribute('data-id', id);
+//                     document.getElementById("note-popup").style.display = "block";
+//                 }
+//             };
+//             xhr.open("POST", "fetch_note.php", true); // Create a new PHP file to fetch note data
+//             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+//             xhr.send("note_id=" + id);
+//         }
+
+//         function closePopup() {
+//             document.getElementById("note-popup").style.display = "none";
+//         }
+
+//             // Function to update the note
+//         function updateNote() {
+//              var id = document.getElementById("popup-text").getAttribute('data-id');
+//              var text = document.getElementById("popup-text").value;
+//              var title = document.getElementById("popup-title-input").value;
+
+//              var xhr = new XMLHttpRequest();
+//              xhr.onreadystatechange = function() {
+//                     if (xhr.readyState == 4 && xhr.status == 200) {
+//                         closePopup();
+//                         location.reload(); // Reload the page after updating the note
+//                     }
+//                 };
+//              xhr.open("POST", "update_note.php", true);
+//              xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+//              xhr.send("id=" + id + "&title=" + title + "&text=" + text);
+//         }
+//         function trashNote(noteId) {
+//     var xhr = new XMLHttpRequest();
+//     xhr.onreadystatechange = function() {
+//         if (xhr.readyState == 4 && xhr.status == 200) {
+//             closePopup();
+//             location.reload();
+//         }
+//     };
+//     xhr.open("POST", "trash_note.php", true);
+//     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+//     xhr.send("note_id=" + noteId);
+// } -->

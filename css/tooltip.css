@@ -1,0 +1,28 @@
+
+.tooltip-container {
+    position: absolute;
+    bottom: 10px; /* Adjust as needed */
+    right: 10px;
+}
+
+.tooltip-icon {
+    width: 24px; /* Adjust width as needed */
+    height: 24px; /* Adjust height as needed */
+    cursor: pointer;
+}
+.tooltip {
+    position: absolute;
+    bottom: 100%; /* Position above the icon */
+    left: -60%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    visibility: hidden;
+    z-index: 9; 
+}
+
+.tooltip-container:hover .tooltip {
+    visibility: visible;
+}

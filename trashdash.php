@@ -18,37 +18,8 @@ $user_id = $_SESSION['user_id'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <link rel="stylesheet" href="css/style.css">
-    <style>
-
-.tooltip-container {
-    position: absolute;
-    bottom: 10px; /* Adjust as needed */
-    right: 10px;
-}
-
-.tooltip-icon {
-    width: 24px; /* Adjust width as needed */
-    height: 24px; /* Adjust height as needed */
-    cursor: pointer;
-}
-.tooltip {
-    position: absolute;
-    bottom: 100%; /* Position above the icon */
-    left: -60%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 5px;
-    border-radius: 3px;
-    visibility: hidden;
-    z-index: 9; 
-}
-
-.tooltip-container:hover .tooltip {
-    visibility: visible;
-}
-
-    </style>
+    <link rel="stylesheet" href="css/tooltip.css">
+    <script src="js/functions.js"></script>
 </head>
 <body>
 <?php include 'bars/sidebar.php'; ?>
@@ -118,94 +89,5 @@ echo "</div>";
             <div id="view-popup-text"></div>
         </div>
 </div>
-<script>
-     function toggleDropdown(element) {
-        var dropdownMenu = element.nextElementSibling;
-        dropdownMenu.classList.toggle('active');
-    }
-
-    // Close dropdowns when clicking outside
-    window.onclick = function(event) {
-        if (!event.target.matches('.dropdown-toggle img')) {
-            var dropdowns = document.getElementsByClassName("dropdown-menu");
-            for (var i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('active')) {
-                    openDropdown.classList.remove('active');
-                }
-            }
-        }
-    }
-    function viewNote(noteId) {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    var data = JSON.parse(xhr.responseText);
-                    showViewPopup(data.title, data.text);
-                }
-            };
-        xhr.open("POST", "view_note.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.send("note_id=" + noteId);
-    }
-
-    function showViewPopup(title, text) {
-        document.getElementById("view-popup-title").textContent = title;
-        document.getElementById("view-popup-text").textContent = text;
-        document.getElementById("view-popup").style.display = "block";
-    }
-
-    function closeViewPopup() {
-        document.getElementById("view-popup").style.display = "none";
-    }
-    
-    function confirmDelete(noteId) {
-        if (confirm("Are you sure you want to delete this note?")) {
-            // If user confirms deletion, proceed with the deletion
-            deleteNote(noteId);
-        }
-    }
-
-    function deleteNote(noteId) {
-        // Send AJAX request to delete the note
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var response = JSON.parse(xhr.responseText);
-                if (response.success) {
-                    // If deletion is successful, reload the page to reflect changes
-                    location.reload();
-                } else {
-                    // If deletion fails, display an error message
-                    alert("Failed to delete note: " + response.error);
-                }
-            }
-        };
-        xhr.open("POST", "delete_note.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.send("note_id=" + noteId);
-    }
-
-    function restoreNote(noteId) {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var response = JSON.parse(xhr.responseText);
-                if (response.success) {
-                    // If restoration is successful, reload the page to reflect changes
-                    location.reload();
-                } else {
-                    // If restoration fails, display an error message
-                    alert("Failed to restore note: " + response.error);
-                }
-            }
-        };
-        xhr.open("POST", "restore_note.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.send("note_id=" + noteId);
-    }
-
-
-</script>
 </body>
 </html>
