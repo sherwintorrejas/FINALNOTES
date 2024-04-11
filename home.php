@@ -108,7 +108,22 @@ $user_id = $_SESSION['user_id'];
             <p id="view-popup-text"></p>
         </div>
     </div>
-
+<script>
+    document.getElementById("add-note-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    var form = this;
+    var formData = new FormData(form);
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            closePopup();
+            location.reload();
+        }
+    };
+    xhr.open("POST", "add_note.php", true);
+    xhr.send(formData);
+});
+</script>
 </div>
 </body>
 </html>

@@ -38,20 +38,20 @@ window.onclick = function(event) {
     }
 }
 
-document.getElementById("add-note-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-    var form = this;
-    var formData = new FormData(form);
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            closePopup();
-            location.reload();
-        }
-    };
-    xhr.open("POST", "add_note.php", true);
-    xhr.send(formData);
-});
+// document.getElementById("add-note-form").addEventListener("submit", function(event) {
+//     event.preventDefault();
+//     var form = this;
+//     var formData = new FormData(form);
+//     var xhr = new XMLHttpRequest();
+//     xhr.onreadystatechange = function() {
+//         if (xhr.readyState == 4 && xhr.status == 200) {
+//             closePopup();
+//             location.reload();
+//         }
+//     };
+//     xhr.open("POST", "add_note.php", true);
+//     xhr.send(formData);
+// });
 
 function updateNote() {
     var id = document.getElementById("popup-text").getAttribute('data-id');
