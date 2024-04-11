@@ -23,6 +23,7 @@
 
         h2 {
             text-align: center;
+            color: white;
         }
 
         .form-group {
@@ -32,6 +33,8 @@
         .form-group label {
             display: block;
             margin-bottom: 5px;
+            font-weight: bold;
+            color: white; 
         }
 
         .form-group input,

@@ -2,16 +2,18 @@
  body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    padding-top: 75px;
     padding-left: 130px;
     justify-content: center;
     align-items: center;
-    /* min-height: 100vh; */
+    min-height: 100vh;
     position: relative; /* Set position relative for absolute positioning */
     background-color: #A8CD9F;  
 }
 
 .content {
+    position: relative;
+    top:10px;
+    left:20px;
     max-width: 800px;
     height: 350px;
     background-color: #fff;
@@ -19,6 +21,7 @@
     padding: 30px;
     box-shadow:  5px 5px 10px #A8CD9F,
         -5px -5px 10px #A8CD9F;
+
 }
 
 .profile-container {
