@@ -19,7 +19,8 @@ $user_id = $_SESSION['user_id'];
     <title>Home Page</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/tooltip.css">
-    <script src="js/functions.js"></script>
+
+    
 </head>
 <body>
 <?php include 'bars/sidebar.php'; ?>
@@ -89,5 +90,133 @@ echo "</div>";
             <div id="view-popup-text"></div>
         </div>
 </div>
+<script>
+    
+var activeDropdown = null;
+
+function closeDropdowns() {
+    var dropdowns = document.querySelectorAll(".dropdown-menu.active");
+    dropdowns.forEach(function(dropdown) {
+        dropdown.classList.remove('active');
+    });
+}
+
+function toggleDropdown(element) {
+    var dropdownMenu = element.nextElementSibling;
+    if (dropdownMenu !== activeDropdown) {
+        closeDropdowns();
+        dropdownMenu.classList.add('active');
+        activeDropdown = dropdownMenu;
+    } else {
+        dropdownMenu.classList.remove('active');
+        activeDropdown = null;
+    }
+}
+
+// Close dropdowns when clicking outside
+window.onclick = function(event) {
+    if (!event.target.matches('.dropdown-toggle img')) {
+        closeDropdowns();
+        activeDropdown = null;
+    }
+}
+
+function deleteNote(noteId) {
+    // Send AJAX request to delete the note
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.success) {
+                // If deletion is successful, reload the page to reflect changes
+                location.reload();
+            } else {
+                // If deletion fails, display an error message
+                alert("Failed to delete note: " + response.error);
+            }
+        }
+    };
+    xhr.open("POST", "delete_note.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("note_id=" + noteId);
+}
+function viewNote(noteId) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var data = JSON.parse(xhr.responseText);
+            showViewPopup(data.title, data.text);
+        }
+    };
+    xhr.open("POST", "view_note.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("note_id=" + noteId);
+}
+
+function showViewPopup(title, text) {
+    document.getElementById("view-popup-title").textContent = title;
+    document.getElementById("view-popup-text").textContent = text;
+    document.getElementById("view-popup").style.display = "block";
+}
+
+function closeViewPopup() {
+    document.getElementById("view-popup").style.display = "none";
+}
+
+function deleteNote(noteId) {
+    // Send AJAX request to delete the note
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    // If deletion is successful, reload the page to reflect changes
+                    location.reload();
+                } else {
+                    // If deletion fails, display an error message
+                    alert("Failed to delete note: " + response.error);
+                }
+            } else {
+                // Handle HTTP error
+                alert("HTTP Error: " + xhr.status);
+            }
+        }
+    };
+    xhr.open("POST", "delete_note.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("note_id=" + noteId);
+}
+
+
+function restoreNote(noteId) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.success) {
+                // If restoration is successful, reload the page to reflect changes
+                location.reload();
+            } else {
+                // If restoration fails, display an error message
+                alert("Failed to restore note: " + response.error);
+            }
+        }
+    };
+    xhr.open("POST", "restore_note.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("note_id=" + noteId);
+}
+
+function confirmDelete(noteId) {
+    var confirmation = confirm("Are you sure you want to delete this note?");
+    if (confirmation) {
+        deleteNote(noteId); // Call the deleteNote function if the user confirms
+        location.reload();
+    }
+}
+
+</script>
 </body>
 </html>
+<!-- change-->

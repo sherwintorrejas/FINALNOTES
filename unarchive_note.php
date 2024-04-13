@@ -21,3 +21,4 @@ if(isset($_POST['note_id'])) {
 // Close database connection
 mysqli_close($link);
 ?>
+<!-- unchange-->

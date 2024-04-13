@@ -67,13 +67,14 @@ include 'connection/validation-process.php';
                 <span class="help-block"><?php echo $confirm_password_err; ?></span>
             </div>
             <div class="form-group <?php echo (!empty($profile_image_err)) ? 'has-error' : ''; ?>">
-                <div class="custom-file-upload">
+                 <label for="profile_image"style="  display:inline-block; position: relative; background-color: white; border-radius: 15px; width: 40%; padding: 5px;">
                     <img src="icons/upload.png" alt="Upload icon" class="upload-icon">
-                    <span id="file-name" class="file-name">Choose Profile Image</span>
+                    <span id="file-name" style="color: black;" >Choose Image</span>
                     <input id="profile_image" type="file" name="profile_image" accept="image/*" onchange="displayFileName(this)" style="display: none;">
-                </div>
-                <span class="help-block"><?php echo $profile_image_err; ?></span>
+                    <span class="help-block"><?php echo $profile_image_err; ?></span>
+                </label>
             </div>
+
 
             <button type="submit" class="btn">Register</button>
         </form>
@@ -81,5 +82,21 @@ include 'connection/validation-process.php';
             <span>Already have an account? </span><a href="login.php">Login</a>
         </div>
     </div>
+    
+<script>
+    document.querySelector('.custom-file-upload').addEventListener('click', function() {
+    document.getElementById('profile_image_input').click();
+});
+
+      function displayFileName(input) {
+        const fileNameSpan = document.getElementById('file-name');
+        if (input.files && input.files.length > 0) {
+            fileNameSpan.textContent = input.files[0].name;
+        } else {
+            fileNameSpan.textContent = '';
+        }
+    }
+</script>
 </body>
 </html>
+<!-- change-->

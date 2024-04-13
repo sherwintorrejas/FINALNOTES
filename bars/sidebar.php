@@ -33,6 +33,7 @@
             margin-bottom: 10px;
             border: solid 2px;
             border-color: white;
+            box-shadow: 0 0 10px rgba(1, 1, 1, 9.5);
         }
 
         .profile a {
@@ -207,3 +208,4 @@
 </div>
 </body>
 </html>
+<!-- unchange -->

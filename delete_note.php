@@ -12,6 +12,9 @@ if (!isset($_SESSION['user_id'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['note_id'])) {
     $note_id = $_POST['note_id'];
 
+    // Debugging: Output the received note_id
+    echo "Received note_id: " . $note_id;
+
     // Perform the deletion query for each relevant table
     $tables = array("deletednotes", "notes", "archive"); // Add more tables if necessary
     $success = true;
@@ -32,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['note_id'])) {
         // Deletion successful
         echo json_encode(array("success" => true));
         exit();
+        
     } else {
         // Deletion failed
         echo json_encode(array("success" => false, "error" => $error_message));
@@ -43,3 +47,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['note_id'])) {
 echo json_encode(array("success" => false, "error" => "Invalid request."));
 exit();
 ?>
+<!-- change-->

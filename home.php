@@ -18,7 +18,6 @@ $user_id = $_SESSION['user_id'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/functions.js"></script>
 
 </head>
 <body>
@@ -125,7 +124,142 @@ $user_id = $_SESSION['user_id'];
 });
 
 
+var activeDropdown = null;
+
+function closeDropdowns() {
+    var dropdowns = document.querySelectorAll(".dropdown-menu.active");
+    dropdowns.forEach(function(dropdown) {
+        dropdown.classList.remove('active');
+    });
+}
+
+function toggleDropdown(element) {
+    var dropdownMenu = element.nextElementSibling;
+    if (dropdownMenu !== activeDropdown) {
+        closeDropdowns();
+        dropdownMenu.classList.add('active');
+        activeDropdown = dropdownMenu;
+    } else {
+        dropdownMenu.classList.remove('active');
+        activeDropdown = null;
+    }
+}
+
+// Close dropdowns when clicking outside
+window.onclick = function(event) {
+    if (!event.target.matches('.dropdown-toggle img')) {
+        closeDropdowns();
+        activeDropdown = null;
+    }
+}
+function showPopup(id, title, text) {
+    document.getElementById("popup-title").textContent = title;
+    document.getElementById("popup-text").value = text;
+    document.getElementById("popup-title-input").value = title;
+    document.getElementById("popup-text").setAttribute('data-id', id);
+    document.getElementById("note-popup").style.display = "block";
+}
+
+function showAddNotePopup() {
+    document.getElementById("add-note-popup").style.display = "block";
+}
+
+function closePopup() {
+    document.getElementById("add-note-popup").style.display = "none";
+    document.getElementById("note-popup").style.display = "none";
+    closeDropdowns(); // Close dropdowns when closing the popup
+}
+
+
+function updateNote() {
+    var noteId = document.getElementById("popup-text").getAttribute('data-id');
+    var updatedTitle = document.getElementById("popup-title-input").value;
+    var updatedText = document.getElementById("popup-text").value;
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            // Optionally, you can handle the response here if needed
+            closePopup(); // Close the popup after successful update
+            location.reload(); // Reload the page to reflect changes
+        }
+    };
+    xhr.open("POST", "update_note.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("note_id=" + noteId + "&title=" + encodeURIComponent(updatedTitle) + "&text=" + encodeURIComponent(updatedText));
+}
+
+
+function archiveNote(noteId) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            closePopup();
+            location.reload();
+        }
+    };
+    xhr.open("POST", "archive_note.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("note_id=" + noteId);
+}
+
+// Function to adjust the number of cards per row dynamically
+function adjustCardsPerRow() {
+    var screenWidth = window.innerWidth;
+    var cardRow = document.getElementById('cardRow');
+    var cardWidth = 220; // Adjust this value based on your card width
+    var numCardsPerRow = Math.floor(screenWidth / cardWidth);
+    if (numCardsPerRow < 1) {
+        numCardsPerRow = 1; // Ensure at least one card per row
+    }
+    cardRow.style.justifyContent = 'space-evenly'; // Or any other preferred alignment
+    cardRow.style.flexWrap = 'wrap';
+    cardRow.style.marginBottom = '20px'; // Adjust margin as needed
+    cardRow.innerHTML += '<div class="spacer" style="flex-basis: ' + (screenWidth - (numCardsPerRow * cardWidth)) / (numCardsPerRow * 2) + 'px"></div>'.repeat(numCardsPerRow - 1);
+}
+
+// Call the function initially and on window resize
+adjustCardsPerRow();
+window.addEventListener('resize', adjustCardsPerRow);
+
+function viewNote(noteId) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var data = JSON.parse(xhr.responseText);
+            showViewPopup(data.title, data.text);
+        }
+    };
+    xhr.open("POST", "view_note.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("note_id=" + noteId);
+}
+
+function showViewPopup(title, text) {
+    document.getElementById("view-popup-title").textContent = title;
+    document.getElementById("view-popup-text").textContent = text;
+    document.getElementById("view-popup").style.display = "block";
+}
+
+function closeViewPopup() {
+    document.getElementById("view-popup").style.display = "none";
+}
+
+function trashNote(noteId) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            closePopup();
+            location.reload();
+        }
+    };
+    xhr.open("POST", "trash_note.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("note_id=" + noteId);
+}
+
 </script>
 </div>
 </body>
 </html>
+<!-- change-->

@@ -18,7 +18,6 @@ $user_id = $_SESSION['user_id'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archive</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/functions.js"></script>
 </head>
 <body>
 <?php include 'bars/sidebar.php'; ?>
@@ -99,7 +98,122 @@ $user_id = $_SESSION['user_id'];
             <div id="view-popup-text"></div>
         </div>
     </div>
+
+    <script>
+        function showPopup(id, title, text) {
+    document.getElementById("popup-title").textContent = title;
+    document.getElementById("popup-text").value = text;
+    document.getElementById("popup-title-input").value = title;
+    document.getElementById("popup-text").setAttribute('data-id', id);
+    document.getElementById("note-popup").style.display = "block";
+}
+function closePopup() {
+    document.getElementById("note-popup").style.display = "none";
+    closeDropdowns(); // Close dropdowns when closing the popup
+}
+
+function updateNote() {
+    var noteId = document.getElementById("popup-text").getAttribute('data-id');
+    var updatedTitle = document.getElementById("popup-title-input").value;
+    var updatedText = document.getElementById("popup-text").value;
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            // Optionally, you can handle the response here if needed
+            closePopup(); // Close the popup after successful update
+            location.reload(); // Reload the page to reflect changes
+        }
+    };
+    xhr.open("POST", "update_note.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("note_id=" + noteId + "&title=" + encodeURIComponent(updatedTitle) + "&text=" + encodeURIComponent(updatedText));
+}
+
+
+
+var activeDropdown = null;
+
+function closeDropdowns() {
+    var dropdowns = document.querySelectorAll(".dropdown-menu.active");
+    dropdowns.forEach(function(dropdown) {
+        dropdown.classList.remove('active');
+    });
+}
+
+function toggleDropdown(element) {
+    var dropdownMenu = element.nextElementSibling;
+    if (dropdownMenu !== activeDropdown) {
+        closeDropdowns();
+        dropdownMenu.classList.add('active');
+        activeDropdown = dropdownMenu;
+    } else {
+        dropdownMenu.classList.remove('active');
+        activeDropdown = null;
+    }
+}
+
+// Close dropdowns when clicking outside
+window.onclick = function(event) {
+    if (!event.target.matches('.dropdown-toggle img')) {
+        closeDropdowns();
+        activeDropdown = null;
+    }
+}
+function trashNote(noteId) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            closePopup();
+            location.reload();
+        }
+    };
+    xhr.open("POST", "trash_note.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("note_id=" + noteId);
+}
+
+function unarchiveNote(noteId) {
+    // AJAX request to unarchive note
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "unarchive_note.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            // Reload page after unarchiving note
+            window.location.reload();
+        }
+    };
+    xhr.send("note_id=" + noteId);
+}
+
+function viewNote(noteId) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var data = JSON.parse(xhr.responseText);
+            showViewPopup(data.title, data.text);
+        }
+    };
+    xhr.open("POST", "view_note.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("note_id=" + noteId);
+}
+
+function showViewPopup(title, text) {
+    document.getElementById("view-popup-title").textContent = title;
+    document.getElementById("view-popup-text").textContent = text;
+    document.getElementById("view-popup").style.display = "block";
+}
+
+function closeViewPopup() {
+    document.getElementById("view-popup").style.display = "none";
+}
+
+
+</script>
 </body>
 </html>
 
 
+<!-- change-->

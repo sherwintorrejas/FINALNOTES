@@ -223,15 +223,7 @@
             padding: 6px 10px;
         }
 
-        .custom-file-upload {
-            display: inline-block;
-            position: relative;
-            background-color: white;
-            border-radius: 15px;
-            width: 55%;
-            padding: 5px;
-        }
-        
+       
         .upload-icon {
             width: 25px; /* Adjust width as needed */
             height: 25px; /* Adjust height as needed */
@@ -239,6 +231,8 @@
             margin-right: 5px; /* Adjust the spacing between the icon and text */
             color: white;
         }
+
+        
         
         .file-name {
             vertical-align: middle;
@@ -259,4 +253,4 @@
             top: 0;
             left: 0;
         }
-        
+        /*change*/

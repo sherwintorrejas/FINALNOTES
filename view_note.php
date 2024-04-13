@@ -19,3 +19,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['note_id'])) {
     echo json_encode(array('error' => 'Invalid request'));
 }
 ?>
+<!-- unchange-->

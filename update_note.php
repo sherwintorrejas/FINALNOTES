@@ -5,7 +5,7 @@ include_once 'connection/config.php';
 // Check if POST data is received
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get the note ID, updated title, and updated text
-    $note_id = $_POST['id'];
+    $note_id = $_POST['note_id']; // Corrected from 'id' to 'note_id'
     $title = $_POST['title'];
     $text = $_POST['text'];
 
@@ -32,3 +32,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_close($link);
 }
 ?>
+<!-- change-->
