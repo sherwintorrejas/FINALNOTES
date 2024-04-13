@@ -61,7 +61,7 @@ $user_id = $_SESSION['user_id'];
             echo "<div class='card-content'>" . (strlen($row['text']) > 60 ? substr($row['text'], 0, 60) . "..." : $row['text']) . "</div>";
             echo "<p class='update-time'>" . formatUpdateTime($row['updated_at']) . "</p>";
             echo "<div class='dropdown'>";
-            echo "<div class='dropdown-toggle' onclick='toggleDropdown(this)'><img src='icons/down.png' alt='Dropdown'></div>";
+            echo "<div class='dropdown-toggle' onclick='toggleDropdown(this)'><img src='icons/more.png' alt='Dropdown'></div>";
             echo "<div class='dropdown-menu'>";
             echo "<div class='dropdown-menu-item' onclick='showPopup(" . $row['note_id'] . ", \"" . addslashes($row['title']) . "\", \"" . addslashes($row['text']) . "\")'>Edit</div>";
  

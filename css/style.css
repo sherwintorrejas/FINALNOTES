@@ -3,7 +3,6 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
     position: relative; /* Set position relative for absolute positioning */
-    background-color: #A8CD9F;
 }
 
 .content {
@@ -153,7 +152,9 @@ body {
     overflow: hidden; /* Hide overflow */
     position: relative; /* Add relative positioning */
     transition: box-shadow 0.3s ease; /* Add transition for smooth hover effect */
-    background-color: #58A399;
+    border: solid 1px;
+    float:left;
+    margin-right: 20px;
 }
 
 .card:hover {
@@ -186,7 +187,6 @@ body {
     top: 10px; /* Adjust as needed */
     right: 10px; /* Adjust as needed */
     cursor: pointer;
-    z-index: 1; /* Add z-index to ensure it appears above other elements */
 }
 
 .dropdown-toggle img {

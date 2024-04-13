@@ -62,7 +62,7 @@ echo "<img src='icons/mark.png' alt='Tooltip' class='tooltip-icon'>";
 echo "<span class='tooltip'>" . $difference . " days until permanent deletion</span>";
 echo "</div>";
 echo "<div class='dropdown'>";
-echo "<div class='dropdown-toggle' onclick='toggleDropdown(this)'><img src='icons/down.png' alt='Dropdown'></div>";
+echo "<div class='dropdown-toggle' onclick='toggleDropdown(this)'><img src='icons/more.png' alt='Dropdown'></div>";
 echo "<div class='dropdown-menu'>";
 echo "<div class='dropdown-menu-item' onclick='confirmDelete(" . $row['note_id'] . ")'>Delete</div>";
 echo "<div class='dropdown-menu-item' onclick='restoreNote(". $row['note_id'] . ")'>Restore</div>";

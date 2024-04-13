@@ -55,7 +55,7 @@ $user_id = $_SESSION['user_id'];
             echo "<div class='card-content'>" . (strlen($row['text']) > 60 ? substr($row['text'], 0, 60) . "..." : $row['text']) . "</div>";
             echo "<p class='update-time'>" . formatUpdateTime($row['updated_at']) . "</p>";
             echo "<div class='dropdown'>";
-            echo "<div class='dropdown-toggle' onclick='toggleDropdown(this)'><img src='icons/down.png' alt='Dropdown'></div>";
+            echo "<div class='dropdown-toggle' onclick='toggleDropdown(this)'><img src='icons/more.png' alt='Dropdown'></div>";
             echo "<div class='dropdown-menu'>";
             echo "<div class='dropdown-menu-item' onclick='showPopup(" . $row['note_id'] . ", \"" . $row['title'] . "\", \"" . $row['text'] . "\")'>Edit</div>";
             echo "<div class='dropdown-menu-item' onclick='archiveNote(" . $row['note_id'] . ")'>Archive</div>";
@@ -77,7 +77,7 @@ $user_id = $_SESSION['user_id'];
     ?>
 
     <div class="add-note-icon">
-        <img src="icons/plus.png" alt="Add Note" id="add-note-button" onclick="showAddNotePopup()">
+        <img src="icons/add.png" alt="Add Note" id="add-note-button" onclick="showAddNotePopup()">
     </div>
 
     <div class="popup" id="add-note-popup">
@@ -123,6 +123,8 @@ $user_id = $_SESSION['user_id'];
     xhr.open("POST", "add_note.php", true);
     xhr.send(formData);
 });
+
+
 </script>
 </div>
 </body>

@@ -12,13 +12,13 @@ include 'connection/validation-process.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/registr.css">
    
 </head>
 
 <body>
 <div class="tittle">
-<h1><span style="color: #333;  font-size: 5rem; color: gray;"><span style="color: #ff4500;">N</span>ote<span style="color: #ff4500;">M</span>atrix</span></h1>
+<h1><span style="color: #333;  font-size: 5rem; color: white;"><span style="color: #0bffa7;">N</span>ote<span style="color: #0bffa7;">M</span>atrix</span></h1>
 </div>
     <div class="container">
         <h2>Register</h2>

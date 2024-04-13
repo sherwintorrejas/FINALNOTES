@@ -12,11 +12,7 @@
             top: 0;
             left: 0;
             padding-top: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            background-color: #58A399;
+            background-color: #00565c;
         }
 
         .profile {
@@ -31,19 +27,22 @@
         }
 
         .profile img {
-            width: 100px;
-            height: 100px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             margin-bottom: 10px;
+            border: solid 2px;
+            border-color: white;
         }
 
         .profile a {
             text-decoration: none;
             color: black;
+            
         }
 
         .profile h2 {
-            color: black;
+            color: white;
             margin: 5px;
             text-decoration: none;
         }
@@ -54,9 +53,8 @@
         }
 
         .nav-link {
-            color: black;
+            color: white;
             text-decoration: none;
-            display: block;
             text-align: left;
             margin-top: 20px;
             display: flex;
@@ -79,11 +77,10 @@
         }
 
         .nav-logout {
-            color: black;
+            color: white;
             text-decoration: none;
-            display: block;
             text-align: left;
-            margin-top: 50px;
+            margin-top: 20px;
             display: flex;
             align-items: center;
             justify-content: flex-start;
@@ -103,17 +100,17 @@
             margin-right: 98px;
         }
         .nav-logout:hover {
-             background-color: #A8CD9F; /* Change background color on hover */
+             background-color: #06bac6; /* Change background color on hover */
          }
         /* Hover effect for nav links */
         .nav-link:hover{
-            background-color: #A8CD9F; /* Change background color on hover */
+            background-color: #06bac6; /* Change background color on hover */
         }
 
         /* Active link styling */
         .active-link {
             color: black; /* Change active link color */
-            background-color:  #A8CD9F; /* Change active link background color */
+            background-color:  #06bac6; /* Change active link background color */
         }
     </style>
 </head>
@@ -183,7 +180,7 @@
     <span>Home</span>
 </a>
 <a href="archive.php" class="nav-link <?php if($currentPage == 'archive.php') echo 'active-link'; ?>">
-    <img src="icons/archive.png" alt="Archive Icon">
+    <img src="icons/arch.png" alt="Archive Icon">
     <span>Archive</span>
 </a>
 <a href="trashdash.php" class="nav-link <?php if($currentPage == 'trashdash.php') echo 'active-link'; ?>">
@@ -192,7 +189,7 @@
 </a>
 <!-- Logout link -->
 <a href="#" class="nav-logout" onclick="return confirmLogout();">
-    <img src="icons/logout.png" alt="Logout Icon">
+    <img src="icons/lgout.png" alt="Logout Icon">
     <span>Logout</span>
 </a>
 

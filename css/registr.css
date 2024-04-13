@@ -17,8 +17,7 @@
             padding: 20px;
             border-radius: 10px;
             background: transparent;
-            box-shadow:  5px 5px 10px,
-                -5px -5px 10px #ffff;
+            box-shadow:  5px 5px 10px;
         }
 
         h2 {
@@ -136,8 +135,7 @@
             padding: 20px;
             border-radius: 13px;
             background: transparent;
-            box-shadow:  5px 5px 10px,
-                        -5px -5px 10px #ffff;
+            box-shadow: 5px 5px 10px;
             max-height: 340px;
         }
         
@@ -191,11 +189,7 @@
         
         }
         
-        .login-form input:focus,
-        .login-form select:focus {
-                    background-color: white;
-                    box-shadow: 13px 13px 100px white, -13px -13px 100px;
-        }
+      
         
         /* Registration link */
         .registration-link {
